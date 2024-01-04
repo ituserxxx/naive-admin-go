@@ -1,0 +1,38 @@
+# 运行环境容器
+version: '3'
+services:
+  naiva_mysql:
+    image: mysql:8.0
+    container_name: naiva_mysql_cn
+    restart: on-failure
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=C.UTF-8
+      - MYSQL_DATABASE=naive_admin
+      - MYSQL_USER=naive_admin
+      - MYSQL_PASSWORD=naive_admin_pass
+      - MYSQL_ROOT_PASSWORD=root
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+
+  naive_mysql_admin:
+    image: phpmyadmin/phpmyadmin
+    container_name: naiva_mysql_admin_cn
+    restart: on-failure
+    ports:
+      - "6002:80"
+    environment:
+      - PMA_ARBITRARY=0
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+      - PMA_HOST=naiva_mysql_cn
+    depends_on:
+      - naiva_mysql
