@@ -1,8 +1,7 @@
-package jwt
+package utils
 
 import (
 	"errors"
-	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 	"os"
 	"time"
@@ -41,14 +40,14 @@ func (j *JWT) createToken(claims CustomClaims) (string, error) {
 }
 
 // GenerateToken 生成令牌
-func GenerateToken(ctx *gin.Context, Id int) string {
+func GenerateToken( uId int) string {
 	j := NewJWT()
 	type cus struct {
 		UID int
 		jwt.RegisteredClaims
 	}
 	claims := cus{
-		Id,
+		uId,
 		jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour)),
 		},

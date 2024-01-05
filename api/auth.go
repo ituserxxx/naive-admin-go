@@ -1,12 +1,14 @@
 package api
 
 import (
+	"crypto/md5"
 	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"naive-admin-go/db"
 	"naive-admin-go/inout"
+	"naive-admin-go/model"
 	"naive-admin-go/utils"
-	"naive-admin-go/utils/response"
 	"net/http"
 )
 
@@ -18,8 +20,8 @@ type auth struct {
 
 func (auth)Captcha(c *gin.Context)  {
 	svg,code := utils.GenerateSVG(80,40)
-	cookieStr := c.Request.Header.Get("cookie")
-	session.Set(cookieStr, code)
+	session := sessions.Default(c)
+	session.Set("captch", code)
 	session.Save()
 	// 设置 Content-Type 为 "image/svg+xml"
 	c.Header("Content-Type", "image/svg+xml; charset=utf-8")
@@ -31,10 +33,25 @@ func (auth)Login(c *gin.Context)  {
 	var params inout.Login
 	err := c.Bind(&params)
 	if err != nil {
-		response.Err(c,20001,err.Error())
+		Resp.Err(c,20001,err.Error())
+		return
 	}
-	cookieStr := c.Request.Header.Get("cookie")
 	session := sessions.Default(c)
+	if params.Captcha != session.Get("captch"){
+		Resp.Err(c,20001,"验证码不正确")
+		return
+	}
+	var info *model.User
+	db.Dao.Model(model.User{}).
+		Where("username =? and password=?",params.Username,fmt.Sprintf("%x", md5.Sum([]byte(params.Password)))).
+		Find(&info)
+	if info.ID == 0 {
+		Resp.Err(c,20001,"账号或密码不正确")
+		return
 
-	fmt.Printf("1111111%#v code= %#v", params,session.Get(cookieStr))
+	}
+	Resp.Succ(c,inout.LoginRes{
+		AccessToken: utils.GenerateToken(info.ID),
+	})
+
 }

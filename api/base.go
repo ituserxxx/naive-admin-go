@@ -1,11 +1,11 @@
-package response
+package api
 
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
-
-type ps struct {
+var Resp = &rps{}
+type rps struct {
 	Code      int         `json:"code"`
 	Message   string      `json:"message"`
 	Data      interface{} `json:"data,omitempty"`
@@ -13,24 +13,24 @@ type ps struct {
 	OriginUrl string      `json:"originUrl"`
 }
 
-func Succ(ctx *gin.Context, data interface{}) {
-	resp := ps{
+func (rps)Succ(c *gin.Context, data interface{}) {
+	resp := rps{
 		Code:      0,
 		Message:   "OK",
 		Data:      data,
-		OriginUrl: ctx.Request.URL.Path,
+		OriginUrl: c.Request.URL.Path,
 	}
-	ctx.Set("succ_response", resp)
-	ctx.JSON(http.StatusOK, resp)
+	c.Set("succ_response", resp)
+	c.JSON(http.StatusOK, resp)
 }
 
-func Err(ctx *gin.Context, ErrCode int, messge string) {
-	resp := ps{
+func (rps)Err(c *gin.Context, ErrCode int, messge string) {
+	resp := rps{
 		Code:      ErrCode,
 		Error:     "error some",
 		Message:   messge,
-		OriginUrl: ctx.Request.URL.Path,
+		OriginUrl: c.Request.URL.Path,
 	}
-	ctx.Set("err_response", resp)
-	ctx.JSON(http.StatusOK, resp)
+	c.Set("err_response", resp)
+	c.JSON(http.StatusOK, resp)
 }
