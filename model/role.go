@@ -1,10 +1,10 @@
 package model
 
 type Role struct {
-	ID     int
-	Code   string
-	Name   string
-	Enable int
+	ID     int    `json:"id"`
+	Code   string `json:"code"`
+	Name   string `json:"name"`
+	Enable int    `json:"enable"`
 }
 
 func (Role) TableName() string {

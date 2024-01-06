@@ -5,15 +5,12 @@ import (
 )
 
 type User struct {
-	ID          int
-	Username    string
-	Password    string
-	Enable      int
-	CreateTime  time.Time `gorm:"column:createTime"`
-	UpdateTime  time.Time `gorm:"column:updateTime"`
-	Profile     Profile   `json:"profile"`
-	Roles       []Role    `json:"roles"`
-	CurrentRole Role      `json:"currentRole"`
+	ID         int       `json:"id"`
+	Username   string    `json:"username"`
+	Password   string    `json:"password"`
+	Enable     int       `json:"enable"`
+	CreateTime time.Time `json:"createTime" gorm:"column:createTime"`
+	UpdateTime time.Time `json:"updateTime" gorm:"column:updateTime"`
 }
 
 func (User) TableName() string {

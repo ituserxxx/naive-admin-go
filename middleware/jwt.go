@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"naive-admin-go/api"
 	"naive-admin-go/utils"
@@ -17,7 +16,6 @@ func Jwt() gin.HandlerFunc {
 			return
 		}
 		j := utils.NewJWT()
-		fmt.Printf("\n  [%s] \n", token)
 		if len(token) > 7 && token[:7] == "Bearer " {
 			token = token[7:]
 		}
@@ -33,6 +31,7 @@ func Jwt() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
+
 		// 继续交由下一个路由处理,并将解析出的信息传递下去
 		c.Set("uid", claims.UID)
 		c.Next()

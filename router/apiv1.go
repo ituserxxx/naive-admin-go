@@ -13,10 +13,19 @@ func Init(r *gin.Engine) {
 	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("captch"))))
 	r.Use(middleware.Cors())
 
-	auth := r.Group("/auth")
-	auth.POST("/login", api.Auth.Login)
-	auth.GET("/captcha", api.Auth.Captcha)
+	r.POST("/auth/login", api.Auth.Login)
+	r.GET("/auth/captcha", api.Auth.Captcha)
+	r.POST("/auth/logout", api.Auth.Logout)
+
 	r.Use(middleware.Jwt())
-	user := r.Group("/user")
-	user.GET("/detail", api.User.Detail)
+
+	r.GET("/user", api.User.List)
+	r.GET("/user/detail", api.User.Detail)
+
+	r.GET("/role", api.Role.List)
+	r.GET("/role/page", api.Role.ListPage)
+	r.GET("/role/permissions/tree", api.Role.PermissionsTree)
+
+	r.GET("/permission/tree", api.Permissions.List)
+	r.GET("/permission/menu/tree", api.Permissions.List)
 }
