@@ -5,7 +5,7 @@ type Permission struct {
 	Name        string `json:"name"`
 	Code        string `json:"code"`
 	Type        string `json:"type"`
-	ParentId    int    `json:"parentId" gorm:"column:parentId"`
+	ParentId    *int    `json:"parentId" gorm:"column:parentId"`
 	Path        string `json:"path"`
 	Redirect    string `json:"redirect"`
 	Icon        string `json:"icon"`

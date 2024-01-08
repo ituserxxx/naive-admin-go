@@ -54,7 +54,23 @@ func (auth) Login(c *gin.Context) {
 	})
 }
 
-
+func (auth) password(c *gin.Context) {
+	var params inout.AuthPwReq
+	err := c.Bind(&params)
+	if err != nil {
+		Resp.Err(c, 20001, err.Error())
+		return
+	}
+	uid, _ := c.Get("uid")
+	var oldCun int64
+	db.Dao.Model(model.User{}).Where("id=? and password=?", uid,fmt.Sprintf("%x", md5.Sum([]byte(params.OldPassword))))
+	if oldCun >0{
+		db.Dao.Model(model.User{}).
+			Where("id=? ",uid).
+			Update("password",fmt.Sprintf("%x", md5.Sum([]byte(params.NewPassword))))
+	}
+	Resp.Succ(c, true)
+}
 func (auth) Logout(c *gin.Context) {
 	Resp.Succ(c, true)
 }

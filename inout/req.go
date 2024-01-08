@@ -5,12 +5,23 @@ type LoginReq struct {
 	Password string `form:"password" binding:"required"`
 	Captcha  string `form:"captcha" binding:"required"`
 }
+type AuthPwReq struct {
+	NewPassword string `form:"newPassword" binding:"required"`
+	OldPassword string `form:"oldPassword" binding:"required"`
+}
 type PatchUserReq struct {
 	Id       int     `json:"id"  binding:"required"`
 	Enable   *bool   `json:"enable,omitempty"`
 	RoleIds  *[]int  `json:"roleIds,omitempty"`
 	Password *string `json:"password,omitempty"`
 	Username *string `json:"username,omitempty"`
+}
+type PatchProfileUserReq struct {
+	Id      int    `json:"id"  binding:"required"`
+	Gender  int    `json:"gender"`
+	NickName string `json:"nickName"`
+	Address string `json:"address"`
+	Email   string `json:"email"`
 }
 type EnableRoleReq struct {
 	Enable bool `json:"enable" binding:"required"`
@@ -41,4 +52,35 @@ type PatchRoleReq struct {
 type PatchRoleOpeateUserReq struct {
 	Id      int   `json:"id" `
 	UserIds []int `json:"userIds"`
+}
+
+type AddPermissionReq struct {
+	Type      string `json:"type" binding:"required"`
+	ParentId  *int   `json:"parentId"`
+	Name      string `json:"name" binding:"required"`
+	Code      string `json:"code" binding:"required"`
+	Path      string `json:"path"`
+	Icon      string `json:"icon"`
+	Layout    string `json:"layout"`
+	Component string `json:"component"`
+	Show      bool   `json:"show"`
+	Enable    bool   `json:"enable"`
+	KeepAlive bool   `json:"keepAlive"`
+	Order     int    `json:"order"`
+}
+
+type PatchPermissionReq struct {
+	Id        int    `json:"id"  binding:"required"`
+	Type      string `json:"type" binding:"required"`
+	ParentId  *int   `json:"parentId"`
+	Name      string `json:"name" binding:"required"`
+	Code      string `json:"code" binding:"required"`
+	Path      string `json:"path"`
+	Icon      string `json:"icon"`
+	Layout    string `json:"layout"`
+	Component string `json:"component"`
+	Show      bool   `json:"show"`
+	Enable    bool   `json:"enable"`
+	KeepAlive bool   `json:"keepAlive"`
+	Order     int    `json:"order"`
 }

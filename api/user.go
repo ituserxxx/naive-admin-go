@@ -77,6 +77,25 @@ func (user) List(c *gin.Context) {
 	Resp.Succ(c, data)
 }
 
+func (user) Profile(c *gin.Context) {
+	var params inout.PatchProfileUserReq
+	err := c.BindJSON(&params)
+	if err != nil {
+		Resp.Err(c, 20001, err.Error())
+		return
+	}
+	err = db.Dao.Model(model.Profile{}).Where("id=?", params.Id).Updates(model.Profile{
+		Gender:   params.Gender,
+		Address:  params.Address,
+		Email:    params.Email,
+		NickName: params.NickName,
+	}).Error
+	if err != nil {
+		Resp.Err(c, 20001, err.Error())
+		return
+	}
+	Resp.Succ(c, err)
+}
 func (user) Update(c *gin.Context) {
 	var params inout.PatchUserReq
 	err := c.BindJSON(&params)
