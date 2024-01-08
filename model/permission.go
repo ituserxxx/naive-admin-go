@@ -17,6 +17,7 @@ type Permission struct {
 	Show        int    `json:"show"`
 	Enable      int    `json:"enable"`
 	Order       int    `json:"order"`
+	Children []Permission `json:"children" gorm:"-"`
 }
 
 func (Permission) TableName() string {

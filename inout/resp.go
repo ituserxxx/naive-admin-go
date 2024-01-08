@@ -2,6 +2,7 @@ package inout
 
 import (
 	"naive-admin-go/model"
+	"time"
 )
 
 type LoginRes struct {
@@ -14,16 +15,19 @@ type UserDetailRes struct {
 	Roles       []*model.Role  `json:"roles" `
 	CurrentRole *model.Role    `json:"currentRole"`
 }
-type PermissionsTreeItem struct {
-	model.Permission
-	Children []model.Permission `json:"children"`
-}
+
 type RoleListRes []*model.Role
-type PermissionsTreeRes []PermissionsTreeItem
 
 type UserListItem struct {
-	model.User
-	model.Profile
+	ID         int       `json:"id"`
+	Username   string    `json:"username"`
+	Enable     bool       `json:"enable"`
+	CreateTime time.Time `json:"createTime"`
+	UpdateTime time.Time `json:"updateTime"`
+	Gender   int    `json:"gender"`
+	Avatar   string `json:"avatar"`
+	Address  string `json:"address"`
+	Email    string `json:"email"`
 	Roles []*model.Role `json:"roles"`
 }
 type UserListRes struct {

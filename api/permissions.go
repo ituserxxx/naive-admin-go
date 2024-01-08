@@ -14,15 +14,20 @@ type permissions struct {
 }
 
 func (permissions) List(c *gin.Context) {
-	var data = make([]inout.PermissionsTreeItem, 0)
-	var onePermissList []model.Permission
+	var onePermissList = make( []model.Permission,0)
 	db.Dao.Model(model.Permission{}).Where("parentId is NULL").Order("`order` Asc").Find(&onePermissList)
-	for _, perm := range onePermissList {
+	for i, perm := range onePermissList {
 		var twoPerissList []model.Permission
 		db.Dao.Model(model.Permission{}).Where("parentId = ?", perm.ID).Order("`order` Asc").Find(&twoPerissList)
-		data = append(data, inout.PermissionsTreeItem{Permission: perm, Children: twoPerissList})
+		for i2, perm2 := range twoPerissList {
+			var twoPerissList2 []model.Permission
+			db.Dao.Model(model.Permission{}).Where("parentId = ?", perm2.ID).Order("`order` Asc").Find(&twoPerissList2)
+			twoPerissList[i2].Children = twoPerissList2
+		}
+		onePermissList[i].Children = twoPerissList
 	}
-	Resp.Succ(c, data)
+
+	Resp.Succ(c, onePermissList)
 }
 
 func (permissions) ListPage(c *gin.Context) {

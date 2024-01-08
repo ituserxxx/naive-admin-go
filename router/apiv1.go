@@ -20,9 +20,18 @@ func Init(r *gin.Engine) {
 	r.Use(middleware.Jwt())
 
 	r.GET("/user", api.User.List)
+	r.POST("/user", api.User.Add)
+	r.DELETE("/user/:id", api.User.Delete)
+	r.PATCH("/user/password/reset/:id", api.User.Update)
+	r.PATCH("/user/:id", api.User.Update)
 	r.GET("/user/detail", api.User.Detail)
 
 	r.GET("/role", api.Role.List)
+	r.POST("/role", api.Role.Add)
+	r.PATCH("/role/:id", api.Role.Update)
+	r.DELETE("/role/:id", api.Role.Delete)
+	r.PATCH("/role/users/add/:id", api.Role.AddUser)
+	r.PATCH("/role/users/remove/:id", api.Role.RemoveUser)
 	r.GET("/role/page", api.Role.ListPage)
 	r.GET("/role/permissions/tree", api.Role.PermissionsTree)
 

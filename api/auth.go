@@ -29,7 +29,7 @@ func (auth) Captcha(c *gin.Context) {
 }
 
 func (auth) Login(c *gin.Context) {
-	var params inout.Login
+	var params inout.LoginReq
 	err := c.Bind(&params)
 	if err != nil {
 		Resp.Err(c, 20001, err.Error())
@@ -48,12 +48,10 @@ func (auth) Login(c *gin.Context) {
 	if info.ID == 0 {
 		Resp.Err(c, 20001, "账号或密码不正确")
 		return
-
 	}
 	Resp.Succ(c, inout.LoginRes{
 		AccessToken: utils.GenerateToken(info.ID),
 	})
-
 }
 
 
