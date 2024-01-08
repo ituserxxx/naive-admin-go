@@ -1,36 +1,17 @@
 # naive-admin-go
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+### 基于vue-naive-admin 前端框架的golan版本做服务端的api
 
-#### Software Architecture
-Software architecture description
+### 使用gin gorm mysql jwt session
 
-#### Installation
+api documnet
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+https://apifox.com/apidoc/shared-ff4a4d32-c0d1-4caf-b0ee-6abc130f734a/api-134496720
 
-#### Instructions
+api demo code
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+https://gitee.com/-/ide/project/isme-admin/isme-nest-serve/edit/main/-/src/modules/role/dto.ts
 
-#### Contribution
+demo
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
-
-
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+https://admin.isme.top/login?redirect=/
