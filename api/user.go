@@ -53,8 +53,7 @@ func (user) List(c *gin.Context) {
 		orm = orm.Where("nickName like ?", "%"+username+"%")
 	}
 
-	var total int64
-	orm.Count(&total)
+	orm.Count(&data.Total)
 	orm.Offset((pageNo - 1) * pageSize).Limit(pageSize).Find(&profileList)
 	for _, datum := range profileList {
 		var uinfo model.User

@@ -42,8 +42,7 @@ func (permissions) ListPage(c *gin.Context) {
 	if name != "" {
 		orm = orm.Where("name like ?", "%"+name+"%")
 	}
-	var total int64
-	orm.Count(&total)
+	orm.Count(&data.Total)
 
 	orm.Offset((pageNo - 1) * pageSize).Limit(pageSize).Find(&data.PageData)
 	for i, datum := range data.PageData {

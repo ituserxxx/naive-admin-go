@@ -32,7 +32,7 @@ type UserListItem struct {
 }
 type UserListRes struct {
 	PageData []UserListItem `json:"pageData"`
-	Total    int            `json:"total"`
+	Total    int64            `json:"total"`
 }
 type RoleListPageItem struct {
 	model.Role
@@ -40,5 +40,5 @@ type RoleListPageItem struct {
 }
 type RoleListPageRes struct {
 	PageData []RoleListPageItem `json:"pageData"`
-	Total    int            `json:"total"`
+	Total    int64            `json:"total"`
 }
