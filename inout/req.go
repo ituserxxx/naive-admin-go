@@ -79,8 +79,8 @@ type PatchPermissionReq struct {
 	Icon      string `json:"icon"`
 	Layout    string `json:"layout"`
 	Component string `json:"component"`
-	Show      bool   `json:"show"`
-	Enable    bool   `json:"enable"`
-	KeepAlive bool   `json:"keepAlive"`
+	Show      int   `json:"show"`
+	Enable    int   `json:"enable"`
+	KeepAlive int   `json:"keepAlive"`
 	Order     int    `json:"order"`
 }

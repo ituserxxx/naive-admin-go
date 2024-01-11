@@ -110,10 +110,10 @@ func (permissions) PatchPermission(c *gin.Context) {
 		Icon:        params.Icon,
 		Component:   params.Component,
 		Layout:      params.Layout,
-		KeepAlive:   IsTrue(params.KeepAlive),
+		KeepAlive:   params.KeepAlive,
 		Method:      params.Component,
-		Show:        IsTrue(params.Show),
-		Enable:      IsTrue(params.Enable),
+		Show:        params.Show,
+		Enable:      params.Enable,
 		Order:       params.Order,
 	}).Error
 	if err != nil {

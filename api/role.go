@@ -69,8 +69,7 @@ func (role) ListPage(c *gin.Context) {
 		}
 		orm = orm.Where("enable = ?", ena)
 	}
-	var total int64
-	orm.Count(&total)
+	orm.Count(&data.Total)
 
 	orm.Offset((pageNo - 1) * pageSize).Limit(pageSize).Find(&data.PageData)
 	for i, datum := range data.PageData {

@@ -16,6 +16,7 @@ type UserDetailRes struct {
 	CurrentRole *model.Role    `json:"currentRole"`
 }
 
+
 type RoleListRes []*model.Role
 
 type UserListItem struct {

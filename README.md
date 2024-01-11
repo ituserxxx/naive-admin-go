@@ -10,6 +10,8 @@
 
 [web demo](https://admin.isme.top/login?redirect=/)
 
+## [api 接口](./api.md)
+
 
 ## 本地运行
 
@@ -28,4 +30,5 @@ cd vue-naive-front && npm install && npm run dev
 ```shell
 go run main.go
 ```
+
 
