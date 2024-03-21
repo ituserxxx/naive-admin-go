@@ -32,3 +32,4 @@ go run main.go
 ```
 
 
+最近在写[rust 版本的服务端](https://github.com/ituserxxx/rust_axum_web_api_demo)
