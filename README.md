@@ -12,7 +12,6 @@
 
 ## [api 接口](./api.md)
 
-
 ## 本地运行
 
 #### 运行数据库服务
@@ -30,6 +29,6 @@ cd vue-naive-front && npm install && npm run dev
 ```shell
 go run main.go
 ```
+其他
+### 基于 [vue-naive-admin 2.0版](https://github.com/zclzone/vue-naive-admin) 前端框架的 [rust 版本](https://github.com/ituserxxx/naive-admin-rust)做服务端
 
-
-最近在写[rust 版本的服务端](https://github.com/ituserxxx/rust_axum_web_api_demo)
